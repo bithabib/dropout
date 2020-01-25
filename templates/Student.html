@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Fontfaces CSS-->
+    <link href="{{url_for('static',filename='css/font-face.css')}}" rel="stylesheet" media="all">
+  
+    <link href="{{url_for('static',filename='vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{{url_for('static',filename='vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{{url_for('static',filename='vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/wow/animate.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/slick/slick.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{{url_for('static',filename='css/theme.css')}}" rel="stylesheet" media="all">
+   
+</head>
+<style type="text/css">
+    #contenitore{
+    position: relative;
+    width: 90%;
+    margin: 10px auto;
+    text-align:center;
+    overflow:hidden;
+    font: 14px 'Trebuchet MS', sans serif;
+  }
+  .left{
+    float:left;
+    width:48%;
+  }
+  #grafico{
+    position:relative;
+    height:400px;
+    border-left:2px solid #000000;
+    border-bottom: 2px solid #000000;
+    width:100%;
+    margin-top:10px;
+  }
+  .riga{
+    position:absolute;
+    left:0;
+    height: 1px;
+    background-color:gray;
+    width: 100%;
+  }
+    .riga div{
+    float:left;
+    margin: -8px 0 0 -40px;
+  }
+  .canc{
+    clear:both;
+  }
+  table{
+    width:60%;
+    background-color: white;
+    color: #000;
+    margin: 1em auto;
+  }
+  table caption{
+    background-color: #D8EED8;
+    color: #004156;
+    text-align: left;
+  }
+  table tr:nth-child(2n){
+   background-color: #D8EED8;
+  }
+  table tr:nth-child(2n+1){
+   background-color: #BFDFFF;
+  }
+  table td{
+    text-align:center;
+    border-bottom: 1px solid #CDCDCD;
+    padding: 6px;
+  }
+  .column{
+    position:absolute;
+    width: 7%;
+    bottom: 0;
+    background-color: #003366;
+    margin-left:5%;
+  }
+  div.button {
+      margin: 0 auto;
+      text-align: center;
+      width: 100px;
+      background-color:#003366;
+      border: 1px solid #003366;
+      border-radius: 5px;
+      padding: 8px;
+      color: #E1E2CF;
+      cursor: pointer;
+  }
+  .column div{
+    margin-top:-20px;
+    height:20px;
+  }
+</style>
+<body style="background-color: #e5e5e5">
+  <header class="header-desktop3 d-none d-lg-block">
+      <div class="section__content section__content--p35">
+          <div class="header3-wrap">
+              <div class="header__logo">
+                  <a href="#">
+                      <img src="{{url_for('static',filename='images/icon/logo1.png')}}" alt="Daffodil International University" />
+                  </a>
+              </div>
+          </div>
+      </div>
+  </header>
+<div style="background: white; height: 20px ; width: 100%">
+   
+</div>
+  <section>
+    <div >
+        <div style="background: white">
+            <div >
+                
+                <h3 style="text-align: center">
+                  {{studentId}}
+                </h3>
+                <h4 style="text-align: center">
+                  Faculty : FSIT, Dpt : CSE <br> Year : 2nd, Semester : 4th, Section : 'C'
+                </h4>
+                <h3 style="text-align: center">
+                  Dropout Probability:{{prob | round(2, 'floor') }}%
+                </h3>
+                <div class="button" >Contact Info</div>
+            </div>
+            <hr>
+        </div>
+    </div>
+  </section>
+
+  
+  <script type="text/javascript">
+    function viewGraph(){
+        $('.column').css('height','0');
+        $('table tr').each(function(index) {
+        var ha = $(this).children('td').eq(1).text();
+          $('#col'+index).animate({height: ha}, 1500).html("<div>"+ha+"</div>");
+        });
+      }
+    $(document).ready(function(){
+        viewGraph();
+    });
+  </script>
+  <div id="contenitore" style="background-color: white">
+    <div class="left">
+
+      <table>
+        <caption style="text-align: center;">Parameter Probability table</caption>
+        <tbody>
+          <tr><td>Total Payment Due</td><td>{{ (prob/1.5) | round(2, 'floor') }}%</td><td style="background-color:#336699">&nbsp;</td></tr>
+          <tr><td>Attendance</td><td>{{ (prob/2) | round(2, 'floor')}}%</td><td style="background-color:#003366">&nbsp;</td></tr>
+          <tr><td>Previous Result</td><td>{{ (prob/2.5) | round(2, 'floor')}}%</td><td style="background-color:#ff6600">&nbsp;</td></tr>
+          <tr><td>Loacl Guirdian</td><td>{{ (prob/3) | round(2, 'floor')}}%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+          <tr><td>Financial aid from varsity</td><td>{{(prob/3.5) | round(2, 'floor')}}%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+          <tr><td>Completed Credit</td><td>{{(prob/4) | round(2, 'floor')}}%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+          <tr><td>Family monthly income</td><td>{{(prob/4.5) | round(2, 'floor')}}%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+          <tr><td>Number of Brother</td><td>{{(prob/5) | round(2, 'floor')}}%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+          <tr><td>Total Family member</td><td>{{(prob/5.5) | round(2, 'floor')}}%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+        </tbody>
+      </table>
+      <div class="button" onclick="viewGraph()">Rerun</div>
+    </div>
+    <div class="left">
+      <div id="grafico">
+        <div class="riga" style="top:25%"><div>75%</div></div>
+        <div class="riga" style="top:50%"><div>50%</div></div>
+        <div class="riga" style="top:75%"><div>25%</div></div>
+        <div id="col0" style="left:0; background-color:#336699;" class="column"></div>
+        <div id="col1" style="left:10%; background-color:#003366;" class="column"></div>
+        <div id="col2" style="left:20%; background-color:#ff6600;" class="column"></div>
+        <div id="col3" style="left:30%; background-color:#ffcc00;" class="column"></div>
+        <div id="col4" style="left:40%; background-color:#ffcc00;" class="column"></div>
+        <div id="col5" style="left:50%; background-color:#ffcc00;" class="column"></div>
+        <div id="col6" style="left:60%; background-color:#ffcc00;" class="column"></div>
+        <div id="col7" style="left:70%; background-color:#ffcc00;" class="column"></div>
+        <div id="col8" style="left:80%; background-color:#ffcc00;" class="column"></div>
+      </div>
+    </div>
+    <div class="canc"></div>
+  </div>
+</body>
+</html>

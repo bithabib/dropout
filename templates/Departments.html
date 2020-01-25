@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>{{department_title}}</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{{url_for('static',filename='css/font-face.css')}}" rel="stylesheet" media="all">
+  
+    <link href="{{url_for('static',filename='vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{{url_for('static',filename='vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{{url_for('static',filename='vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/wow/animate.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/slick/slick.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{{url_for('static',filename='css/theme.css')}}" rel="stylesheet" media="all">
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop3 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                    <div class="header__logo">
+                        <a href="whole_dashboard">
+                            <img src="{{url_for('static',filename='images/icon/logo1.png')}}" alt="Daffodil International University" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- PAGE CONTENT-->
+        <div class="page-content--bgf7">
+            <!-- BREADCRUMB-->
+            <section class="au-breadcrumb2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="au-breadcrumb-content">
+                                <form class="au-form-icon--sm" action="" method="post">
+                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Search for datas &amp; reports...">
+                                    <button class="au-btn--submit2" type="submit">
+                                        <i class="zmdi zmdi-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END BREADCRUMB-->
+
+            <!-- WELCOME-->
+            <section class="welcome p-t-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="title-4">{{department_title}}
+                                <span>!</span>
+                            </h1>
+                            <hr class="line-seprate">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END WELCOME-->
+
+              <!-- STATISTIC-->
+            <section class="statistic statistic2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--blue">
+                                <h2 class="number">{{predictionlist|length}}</h2>
+                                <span class="desc">Total Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-account-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--green">
+                                <h2 class="number">{{color['green']|length}}</h2>
+                                <span class="desc">Green Zone Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--orange">
+                                <h2 class="number">{{color['yellow']|length}}</h2>
+                                <span class="desc">Yellow Zone Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--red">
+                                <h2 class="number">{{color['red']|length}}</h2>
+                                <span class="desc">Red Zone Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END STATISTIC-->
+
+            <!-- STATISTIC CHART-->
+            <section class="statistic-chart">
+                <div style="overflow: hidden;"> 
+                    <div style="overflow: hidden; width: 100%; margin: 10px;">
+                        <div id="piechart" style="float: left; margin: 10px"></div>
+                        <div id="columnchart_material" style="float: left;width: 550px; height: 400px; margin: 10px">
+                        </div>
+                        <div id="chartContainer" style="float: left;height: 400px; width: 550px; margin: 10px"></div>
+                        <div id="chartdiv" style="float: left;height: 400px; width: 660px; margin: 10px; background-color: white"></div>
+                  
+                    </div>
+                </div>
+                
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    // Load google charts
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    // Draw the chart and set the chart values
+                    function drawChart() {
+                      var data = google.visualization.arrayToDataTable([
+                      ['Task', 'Whole Student view With Red Green and Yellow Zone'],
+                      ['Green', 1],
+                      ['Red', 2],
+                      ['Yellow', 2]
+                    ]);
+
+                      // Optional; add a title and set the width and height of the chart
+                      var options = {'title':'Whole Student view With Red Green and Yellow Zone', 'width':550, 'height':400};
+
+                      // Display the chart inside the <div> element with id="piechart"
+                      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                      chart.draw(data, options);
+                    }
+                </script>
+            
+                <script type="text/javascript">
+                  google.charts.load('current', {'packages':['bar']});
+                  google.charts.setOnLoadCallback(drawChart);
+
+                  function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                      ['Department', 'Green', 'Red', 'Yellow'],
+                      ['CSE', 1000, 400, 200],
+                      ['EEE', 1170, 460, 250],
+                      ['SWE', 660, 1120, 300],
+                      ['Textile', 1030, 540, 350]
+                    ]);
+
+                    var options = {
+                      chart: {
+                        title: 'Dropout View for All Department',
+                        subtitle: 'Green, Red, and Yellow',
+                      }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                  }
+                </script>
+                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+                <script>
+                    window.onload = function () {
+
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        theme: "light2",
+                        title:{
+                            text: "Simple Line Chart"
+                        },
+                        axisY:{
+                            includeZero: false
+                        },
+                        data: [{        
+                            type: "line",       
+                            dataPoints: [
+                                { y: 450 },
+                                { y: 414},
+                                { y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+                                { y: 460 },
+                                { y: 450 },
+                                { y: 500 },
+                                { y: 480 },
+                                { y: 480 },
+                                { y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+                                { y: 500 },
+                                { y: 480 },
+                                { y: 510 }
+                            ]
+                        }]
+                    });
+                    chart.render();
+
+                    }
+                </script>
+                <script src="https://www.amcharts.com/lib/4/core.js"></script>
+                <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+                <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+                <script>
+                    am4core.ready(function() {
+
+                    // Themes begin
+                    am4core.useTheme(am4themes_animated);
+                    // Themes end
+
+                    // Create chart instance
+                    var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+                    // Add data
+                    chart.data = [ {
+                      "Department": "CSE",
+                      "dropedstudent": 501
+                    }, {
+                      "Department": "EEE",
+                      "dropedstudent": 301
+                    },{
+                      "Department": "SWE",
+                      "dropedstudent": 340
+                    } ];
+
+                    // Add and configure Series
+                    var pieSeries = chart.series.push(new am4charts.PieSeries());
+                    pieSeries.dataFields.value = "dropedstudent";
+                    pieSeries.dataFields.category = "Department";
+                    pieSeries.slices.template.stroke = am4core.color("#fff");
+                    pieSeries.slices.template.strokeWidth = 2;
+                    pieSeries.slices.template.strokeOpacity = 1;
+
+                    // This creates initial animation
+                    pieSeries.hiddenState.properties.opacity = 1;
+                    pieSeries.hiddenState.properties.endAngle = -90;
+                    pieSeries.hiddenState.properties.startAngle = -90;
+
+                    }); // end am4core.ready()
+                </script>
+
+
+            </section>
+
+            <!-- END STATISTIC CHART-->
+
+
+            <!-- DATA TABLE-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="title-5 m-b-35">data table</h3>
+
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-left">
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select class="js-select2" name="property">
+                                            <option selected="selected">Yesr</option>
+                                            <option value="">1st</option>
+                                            <option value="">2nd</option>
+                                            <option value="">3rd</option>
+                                            <option value="">4th</option>
+                                            
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select class="js-select2" name="time">
+                                            <option selected="selected">Semester</option>
+                                            <option value="">1st</option>
+                                            <option value="">2nd</option>
+                                            <option value="">3rd</option>
+                                            <option value="">4th</option>
+                                            <option value="">5th</option>
+                                            <option value="">6th</option>
+                                            <option value="">7th</option>
+                                            <option value="">8th</option>
+                                            <option value="">9th</option>
+                                            <option value="">10th</option>
+                                            <option value="">11th</option>
+                                            <option value="">12th</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select id="mylist" class="js-select2" onchange="myFunction()" name="time">
+                                            <option>Student Zone</option>
+                                            <option>Green</option>
+                                            <option>Yellow</option>
+                                            <option>Red</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <button class="au-btn-filter">
+                                        <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive table-responsive-data2">
+                                <table id="myTable" class="table table-data2">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox">
+                                                    <span class="au-checkmark"></span>
+                                                </label>
+                                            </th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Year</th>
+                                            <th>Semester</th>
+                                            <th>Section</th>
+                                            <th>Dropout Probability</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                   
+                                    <tbody>
+                                        {% set count = namespace(value=0) %}
+                                        {% for i in predictionlist %}
+                                            <tr class="tr-shadow">
+                                                <td>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </td>
+                                                <form action="Student" method="POST">
+                                                    <td>
+                                                        <input style="background: white; margin-left: 10px ; width: 90%; color: blue" type="submit" name="submit" value="{{i}}">
+                                                        <input type="hidden" name="prob" value="{{predictionlist[i][0]}}"> 
+                                                    </td>
+                                                </form>
+                                                <form action="Student" method="POST">
+                                                    <td>
+                                                        <input style="background: white; margin-left: 10px ; width: 90%; color: blue" type="submit" name="submit" value="Habibur Rahman{{count.value}}">
+                                                    </td>
+                                                </form>
+                                                <td class="desc">1st</td>
+                                                <td>3rd</td>
+                                                <td>
+                                                    <span class="status--process">C</span>
+                                                </td>
+                                                <td>{{predictionlist[i][0]}}</td>
+                                                <td>{{predictionlist[i][1]}}</td>
+                                            </tr>
+                                            {% set count.value = count.value + 1 %}
+                                        {% endfor %}
+                                    </tbody>            
+                                   
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END DATA TABLE-->
+
+            <!-- COPYRIGHT-->
+            <section class="p-t-60 p-b-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 DIU. All rights reserved. Template by <a href="http://daffodilvarsity.edu.bd/">DIU</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END COPYRIGHT-->
+        </div>
+
+    </div>
+
+
+
+
+        <script>
+            function myFunction() {
+              var input, filter, table, tr, td, i;
+              input = document.getElementById("mylist");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("myTable");
+              tr = table.getElementsByTagName("tr");
+              
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[7];
+                if (td) {
+                  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }       
+              }
+            }
+        </script>
+
+
+
+
+
+    <!-- Jquery JS-->
+    <script src="{{url_for('static',filename='vendor/jquery-3.2.1.min.js')}}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{{url_for('static',filename='vendor/bootstrap-4.1/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
+    <!-- Vendor JS       -->
+    <script src="{{url_for('static',filename='vendor/slick/slick.min.js')}}">
+    </script>
+    <script src="{{url_for('static',filename='vendor/wow/wow.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/animsition/animsition.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
+    </script>
+    <script src="{{url_for('static',filename='vendor/counter-up/jquery.waypoints.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/counter-up/jquery.counterup.min.js')}}">
+    </script>
+    <script src="{{url_for('static',filename='vendor/circle-progress/circle-progress.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+
+    <script src="{{url_for('static',filename='vendor/select2/select2.min.js')}}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

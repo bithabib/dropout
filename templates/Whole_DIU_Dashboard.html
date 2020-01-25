@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>{{Whole_DashDic.head_title}}</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{{url_for('static',filename='css/font-face.css')}}" rel="stylesheet" media="all">
+  
+    <link href="{{url_for('static',filename='vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{{url_for('static',filename='vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{{url_for('static',filename='vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/wow/animate.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/slick/slick.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{url_for('static',filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{{url_for('static',filename='css/theme.css')}}" rel="stylesheet" media="all">
+</head>
+<style>
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+#contenitore{
+position: relative;
+width: 800px;
+margin: 20px auto;
+text-align:center;
+overflow:hidden;
+font: 14px 'Trebuchet MS', sans serif;
+}
+.left{
+float:left;
+width:48%;
+}
+#grafico{
+position:relative;
+height:300px;
+border-left:2px solid #000000;
+border-bottom: 2px solid #000000;
+width:100%;
+margin-top:20px;
+}
+.riga{
+position:absolute;
+left:0;
+height: 1px;
+background-color:gray;
+width: 100%;
+}
+.riga div{
+float:left;
+margin: -8px 0 0 -40px;
+}
+.canc{
+clear:both;
+}
+
+.trback:nth-child(2n){
+background-color: #D8EED8;
+}
+.trback:nth-child(2n+1){
+background-color: #BFDFFF;
+}
+.column{
+position:absolute;
+width: 16%;
+bottom: 0;
+background-color: #003366;
+margin-left:5%;
+}
+
+.column div{
+margin-top:-20px;
+height:20px;
+.input.submit: hover{
+    cursor:hand;
+    background: red;
+}
+
+</style>
+
+</style>
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop3 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                    <div class="header__logo">
+                        <a href="whole_dashboard">
+                            <img src="{{url_for('static',filename='images/icon/logo1.png')}}" alt="Daffodil International University" />
+                        </a>
+                    </div>
+                    <div class="header__navbar">
+                        <ul class="list-unstyled">
+                            <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                    <span class="bot-line"></span>
+                                </a>
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li>
+                                        <a href="whole_dashboard">Summary of Whole DIU</a>
+                                    </li>
+                                    {% for i in faculties %}
+                                        {% for j in i %}
+                                            {% if 'faculty' in j %}
+                                                <form action="faculties" method="POST">
+                                                    <li>
+                                                        <input style="background: white; margin-left: 10px" type="submit" name="submit" value="{{i[j]}}">
+                                                        <hr>                                                
+                                                    </li>
+                                                </form>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                             </li>   
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- END HEADER DESKTOP-->
+
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile header-mobile-2 d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" href="index.html">
+                            <img src="{{url_for('static',filename='images/icon/logo1.png')}}" alt="CoolAdmin" />
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="index.html">Summary of Whole DIU Dashboard</a>
+                                </li>
+                                {% for i in faculties %}
+                                    {% for j in i %}
+                                        {% if 'faculty' in j %}
+                                            <form>
+                                                <li>
+                                                    <input style="background: white; margin-left: 10px" type="submit" name="submit" value="{{i[j]}}">
+                                                    <hr>                                                
+                                                </li>
+                                            </form>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- PAGE CONTENT-->
+        <div class="page-content--bgf7">
+            <!-- BREADCRUMB-->
+            <section class="au-breadcrumb2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="au-breadcrumb-content">
+                                <form class="au-form-icon--sm" action="" method="post">
+                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Search for datas &amp; reports...">
+                                    <button class="au-btn--submit2" type="submit">
+                                        <i class="zmdi zmdi-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END BREADCRUMB-->
+
+            <!-- WELCOME-->
+            <section class="welcome p-t-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="title-4">{{Whole_DashDic.title}}
+                                <span>!</span>
+                            </h1>
+                            <hr class="line-seprate">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END WELCOME-->
+
+              <!-- STATISTIC-->
+            <section class="statistic statistic2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--blue">
+                                <h2 class="number">{{predictionlist|length}}</h2>
+                                <span class="desc">Total Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-account-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--green">
+                                <h2 class="number">{{color['green']|length}}</h2>
+                                <span class="desc">Green Zone Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--orange">
+                                <h2 class="number">{{color['yellow']|length}}</h2>
+                                <span class="desc">Yellow Zone Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--red">
+                                <h2 class="number">{{color['red']|length}}</h2>
+                                <span class="desc">Red Zone Student</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END STATISTIC-->
+
+            <!-- STATISTIC CHART-->
+            <section class="statistic-chart">
+                <div style="overflow: hidden;"> 
+                    <div style="overflow: hidden; width: 100%;">
+                        
+                        <div id="myDiv" style="float: left; width: 50%; height: 400px; margin-left: 2px"> 
+                            <div style="background-color: white; text-align: center">
+                                <h3 style="text-align: center;"> Whole DIU info Exapand by Clicking  </h3>
+                            </div>
+                        </div>
+                        <div id="piechart" style="float: right; margin-right: 20px;height: 440px; width: 47%">
+                            
+                        </div>
+                        <div id="visitedProductGraph" style="height: 520px; width: 100%; background-color: white; margin-right: 20px; margin-left: 2px; margin-top: 5px;float: left; ">
+                            <h3 style="text-align: center ;margin-top: 20px;"> DIU Info</h3>
+                        </div>
+                        
+                        
+                        <div id="contenitore" style="background-color: white; float: left; width: 50% ;height: 400px; margin: 10px">
+                            <div class="left">
+                              <table style="width:60%; background-color: white; color: #000; margin: 1em auto;">
+                                <caption style="text-align: center;background-color: #003366; color: #004156 ; color: white">Parameter Probability table</caption>
+                                <tbody>
+                                  <tr class="trback"><td style="text-align:center; border-bottom: 1px solid #CDCDCD; padding: 6px;">Faculty of Business and Entrepreneurship</td><td>90%</td><td style="background-color:#336699">&nbsp;</td></tr>
+                                  <tr class="trback"><td style="text-align:center; border-bottom: 1px solid #CDCDCD; padding: 6px;">Faculty of Science and Information Technology</td><td>68%</td><td style="background-color:#003366">&nbsp;</td></tr>
+                                  <tr class="trback"><td style="text-align:center; border-bottom: 1px solid #CDCDCD; padding: 6px;">Faculty of Engineering</td><td>30%</td><td style="background-color:#ff6600">&nbsp;</td></tr>
+                                  <tr class="trback"><td style="text-align:center; border-bottom: 1px solid #CDCDCD; padding: 6px;">Faculty of Applied Health Sciences</td><td>20%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="left">
+                              <div id="grafico">
+                                <div class="riga" style="top:25%"><div>75%</div></div>
+                                <div class="riga" style="top:50%"><div>50%</div></div>
+                                <div class="riga" style="top:75%"><div>25%</div></div>
+                                <div id="col0" style="left:0; background-color:#336699;" class="column"></div>
+                                <div id="col1" style="left:25%; background-color:#003366;" class="column"></div>
+                                <div id="col2" style="left:50%; background-color:#ff6600;" class="column"></div>
+                                <div id="col3" style="left:75%; background-color:#ffcc00;" class="column"></div>
+                              </div>
+                            </div>
+                            <div class="canc"></div>
+                      </div>
+                        
+                    <div id="chartdiv" style="float: left; height: 400px; width: 560px; margin: 10px; background-color: white"></div>
+                  
+                    </div>
+                </div>
+                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                <!-- STATISTIC CHART-->
+
+                
+                <script type="text/javascript">
+                    var data = [{
+                      type: "sunburst",
+                      ids: [
+                        "Faculty1", "Faculty2", "Faculty3","Faculty4","Faculty5",
+                        "BA", "BS","RE","THM","IE",
+                        "CSE", "CIS", "SWE", "ESDM", "MCT", "GED",
+                        "EEE", "ETE", "TE", "CE",
+                        "PHA", "PH", "NFE",
+                        "ENG", "JMC", "DS", "ISLM",
+                        "BAYear1","BAYear2","BAYear3","BAYear4",
+                        "BSYear1","BSYear2","BSYear3","BSYear4",
+                        "REYear1","REYear2","REYear3","REYear4",
+                        "THMYear1","THMYear2","THMYear3","THMYear4",
+                        "IEYear1","IEYear2","IEYear3","IEYear4",
+                        "CSEYear1","CSEYear2","CSEYear3","CSEYear4",
+                        "CISYear1","CISYear2","CISYear3","CISYear4",
+                        "SWEYear1","SWEYear2","SWEYear3","SWEYear4",
+                        "ESDMYear1","ESDMYear2","ESDMYear3","ESDMYear4",
+                        "MCTYear1","MCTYear2","MCTYear3","MCTYear4",
+                        "GEDYear1","GEDYear2","GEDYear3","GEDYear4",
+                        "EEEYear1","EEEYear2","EEEYear3","EEEYear4",
+                        "ETEYear1","ETEYear2","ETEYear3","ETEYear4",
+                        "TEYear1","TEYear2","TEYear3","TEYear4",
+                        "CEYear1","CEYear2","CEYear3","CEYear4",
+                        "PHAYear1","PHAYear2","PHAYear3","PHAYear4",
+                        "PHYear1","PHYear2","PHYear3","PHYear4",
+                        "NFEYear1","NFEYear2","NFEYear3","NFEYear4",
+                        "ENGYear1","ENGYear2","ENGYear3","ENGYear4",
+                        "JMCYear1","JMCYear2","JMCYear3","JMCYear4",
+                        "DSYear1","DSYear2","DSYear3","DSYear4",
+                        "ISLMYear1","ISLMYear2","ISLMYear3","ISLMYear4"
+                      ],
+                      labels: [
+                        "Faculty of Business and<br>Entrepreneurship<br> Total Student:243 <br> Dropout Student: 33", 
+                        "Faculty of Science and<br>Information Technology<br>Total Student: <br>Dropout Student: 33",
+                        "Faculty of Engineering<br>Total Student: 2342<br> Dropout Student: 33",
+                        "Faculty of Applied Health Sciences<br>Total Student: 3234<br>Dropout Student: 33",
+                        "Faculty of Humanities and Social Science<br>Total Student: 3234<br>Dropout Student: 33", 
+                        "BA<br>Total Student: 3234<br>Dropout Student: 33", "BS<br>Total Student: 3234<br>Dropout Student: 33","RE<br>Total Student: 3234<br>Dropout Student: 33", "THM<br>Total Student: 3234<br>Dropout Student: 33", "IE<br>Total Student: 3234<br>Dropout Student: 33", 
+                        "CSE<br>Total Student: 3234<br>Dropout Student: 33", "CIS<br>Total Student: 3234<br>Dropout Student: 33","SWE<br>Total Student: 3234<br>Dropout Student: 33", "ESDM<br>Total Student: 3234<br>Dropout Student: 33", "MCT<br>Total Student: 3234<br>Dropout Student: 33", "GED<br>Total Student: 3234<br>Dropout Student: 33",
+                        "EEE<br>Total Student: 3234<br>Dropout Student: 33", "ETE<br>Total Student: 3234<br>Dropout Student: 33","TE<br>Total Student: 3234<br>Dropout Student: 33", "CE<br>Total Student: 3234<br>Dropout Student: 33",
+                        "PHA<br>Total Student: 3234<br>Dropout Student: 33", "PH<br>Total Student: 3234<br>Dropout Student: 33","NFE<br>Total Student: 3234<br>Dropout Student: 33",
+                        "ENG<br>Total Student: 3234<br>Dropout Student: 33", "JMC<br>Total Student: 3234<br>Dropout Student: 33","DS<br>Total Student: 3234<br>Dropout Student: 33", "ISLM<br>Total Student: 3234<br>Dropout Student: 33",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year",
+                        "1st Year","2nd Year","3rd Year","4th Year"
+                      
+                      ],
+                      parents: [
+                        "", "", "","","",
+                        "Faculty1", "Faculty1", "Faculty1", "Faculty1", "Faculty1", 
+                        "Faculty2", "Faculty2", "Faculty2", "Faculty2", "Faculty2", "Faculty2",
+                        "Faculty3", "Faculty3", "Faculty3", "Faculty3",
+                        "Faculty4", "Faculty4", "Faculty4",
+                        "Faculty5", "Faculty5", "Faculty5", "Faculty5",
+                        "BA","BA","BA","BA",
+                        "BS","BS","BS","BS",
+                        "RE","RE","RE","RE",
+                        "THM","THM","THM","THM",
+                        "IE","IE","IE","IE",
+                        "CSE","CSE","CSE","CSE",
+                        "CIS","CIS","CIS","CIS",
+                        "SWE", "SWE", "SWE", "SWE",
+                        "ESDM","ESDM","ESDM","ESDM",
+                        "MCT","MCT","MCT","MCT",
+                        "GED","GED","GED","GED",
+                        "EEE", "EEE", "EEE", "EEE", 
+                        "ETE","ETE","ETE","ETE",
+                        "TE","TE","TE","TE",
+                        "CE","CE","CE","CE",
+                        "PHA","PHA","PHA","PHA",
+                        "PH","PH","PH","PH",
+                        "NFE","NFE","NFE","NFE",
+                        "ENG","ENG","ENG","ENG",
+                        "JMC","JMC","JMC","JMC",
+                        "DS","DS","DS","DS",
+                        "ISLM","ISLM","ISLM","ISLM",
+                        
+
+                      ],
+                      outsidetextfont: {size: 20, color: "#377eb8"},
+                      //leaf: {opacity: 0.4},
+                      marker: {line: {width: 2}},
+                    }];
+
+                    var layout = {
+                      margin: {l: 0, r: 0, b: 0, t:0},
+                      sunburstcolorway:["#636efa","#ef553b","#00cc96"],
+                    };
+
+                    Plotly.newPlot('myDiv', data, layout, {showSendToCloud: true})
+
+                </script>
+
+
+
+
+
+                <script src="https://d3js.org/d3.v4.min.js"></script>
+                <script>
+
+                    var treeData =
+                      {
+                        "name": "DIU-> TS: 2332,DS: 34" ,
+                        "children": [
+                          { 
+                            "name": "FBE-> TS: 2332,DS: 34",
+                            "children": [
+                              { "name": "TS: 2332,DS: 34" },
+                              { "name": "TS: 2332,DS: 34" },
+                              { "name": "TS: 2332,DS: 34" },
+                              { "name": "TS: 2332,DS: 34" },
+                              { "name": "TS: 2332,DS: 34" }
+                            ]
+                          },
+                          { 
+                            "name": "FSIT-> TS: 2332,DS: 34",
+                            "children":[
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" }
+                            ]},
+                          { "name": "FE-> TS: 2332,DS: 34",
+                            "children":[
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" }
+                            ]},
+                          { "name": "FAHS-> TS: 2332,DS: 34",
+                            "children":[
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" }
+                            ]},
+                          { "name": "FHSS-> TS: 2332,DS: 34",
+                            "children":[
+                                {   "name": "TS: 2332,DS: 34",
+                                    "children":[
+                                        { "name": "TS: 2332,DS: 34" },
+                                        { "name": "TS: 2332,DS: 34" },
+                                        { "name": "TS: 2332,DS: 34" },
+                                        { "name": "TS: 2332,DS: 34" },
+                                        { "name": "TS: 2332,DS: 34" },
+                                        { "name": "TS: 2332,DS: 34" }
+                                    ]},
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" },
+                                { "name": "TS: 2332,DS: 34" }
+                            ]}
+                        ]
+                      };
+
+                    // Set the dimensions and margins of the diagram
+                    var margin = {top: 20, right: 90, bottom: 30, left: 200},
+                        width = 960 - margin.left - margin.right,
+                        height = 500 - margin.top - margin.bottom;
+
+                    // append the svg object to the body of the page
+                    // appends a 'group' element to 'svg'
+                    // moves the 'group' element to the top left margin
+                    var svg = d3.select("#visitedProductGraph").append("svg")
+                        .attr("width", width + margin.right + margin.left)
+                        .attr("height", height + margin.top + margin.bottom)
+                      .append("g")
+                        .attr("transform", "translate("
+                              + margin.left + "," + margin.top + ")");
+
+                    var i = 0,
+                        duration = 750,
+                        root;
+
+                    // declares a tree layout and assigns the size
+                    var treemap = d3.tree().size([height, width]);
+
+                    // Assigns parent, children, height, depth
+                    root = d3.hierarchy(treeData, function(d) { return d.children; });
+                    root.x0 = height / 2;
+                    root.y0 = 0;
+
+                    // Collapse after the second level
+                    root.children.forEach(collapse);
+
+                    update(root);
+
+                    // Collapse the node and all it's children
+                    function collapse(d) {
+                      if(d.children) {
+                        d._children = d.children
+                        d._children.forEach(collapse)
+                        d.children = null
+                      }
+                    }
+
+                    function update(source) {
+
+                      // Assigns the x and y position for the nodes
+                      var treeData = treemap(root);
+
+                      // Compute the new tree layout.
+                      var nodes = treeData.descendants(),
+                          links = treeData.descendants().slice(1);
+
+                      // Normalize for fixed-depth.
+                      nodes.forEach(function(d){ d.y = d.depth * 180});
+
+                      // ****************** Nodes section ***************************
+
+                      // Update the nodes...
+                      var node = svg.selectAll('g.node')
+                          .data(nodes, function(d) {return d.id || (d.id = ++i); });
+
+                      // Enter any new modes at the parent's previous position.
+                      var nodeEnter = node.enter().append('g')
+                          .attr('class', 'node')
+                          .attr("transform", function(d) {
+                            return "translate(" + source.y0 + "," + source.x0 + ")";
+                        })
+                        .on('click', click);
+
+                      // Add Circle for the nodes
+                      nodeEnter.append('circle')
+                          .attr('class', 'node')
+                          .attr('r', 1e-6)
+                          .style("fill", function(d) {
+                              return d._children ? "lightsteelblue" : "#fff";
+                          });
+
+                      // Add labels for the nodes
+                      nodeEnter.append('text')
+                          .attr("dy", ".35em")
+                          .attr("x", function(d) {
+                              return d.children || d._children ? -13 : 13;
+                          })
+                          .attr("text-anchor", function(d) {
+                              return d.children || d._children ? "end" : "start";
+                          })
+                          .text(function(d) { return d.data.name; });
+
+                      // UPDATE
+                      var nodeUpdate = nodeEnter.merge(node);
+
+                      // Transition to the proper position for the node
+                      nodeUpdate.transition()
+                        .duration(duration)
+                        .attr("transform", function(d) { 
+                            return "translate(" + d.y + "," + d.x + ")";
+                         });
+
+                      // Update the node attributes and style
+                      nodeUpdate.select('circle.node')
+                        .attr('r', 10)
+                        .style("fill", function(d) {
+                            return d._children ? "lightsteelblue" : "#fff";
+                        })
+                        .attr('cursor', 'pointer');
+
+
+                      // Remove any exiting nodes
+                      var nodeExit = node.exit().transition()
+                          .duration(duration)
+                          .attr("transform", function(d) {
+                              return "translate(" + source.y + "," + source.x + ")";
+                          })
+                          .remove();
+
+                      // On exit reduce the node circles size to 0
+                      nodeExit.select('circle')
+                        .attr('r', 1e-6);
+
+                      // On exit reduce the opacity of text labels
+                      nodeExit.select('text')
+                        .style('fill-opacity', 1e-6);
+
+                      // ****************** links section ***************************
+
+                      // Update the links...
+                      var link = svg.selectAll('path.link')
+                          .data(links, function(d) { return d.id; });
+
+                      // Enter any new links at the parent's previous position.
+                      var linkEnter = link.enter().insert('path', "g")
+                          .attr("class", "link")
+                          .attr('d', function(d){
+                            var o = {x: source.x0, y: source.y0}
+                            return diagonal(o, o)
+                          });
+
+                      // UPDATE
+                      var linkUpdate = linkEnter.merge(link);
+
+                      // Transition back to the parent element position
+                      linkUpdate.transition()
+                          .duration(duration)
+                          .attr('d', function(d){ return diagonal(d, d.parent) });
+
+                      // Remove any exiting links
+                      var linkExit = link.exit().transition()
+                          .duration(duration)
+                          .attr('d', function(d) {
+                            var o = {x: source.x, y: source.y}
+                            return diagonal(o, o)
+                          })
+                          .remove();
+
+                      // Store the old positions for transition.
+                      nodes.forEach(function(d){
+                        d.x0 = d.x;
+                        d.y0 = d.y;
+                      });
+
+                      // Creates a curved (diagonal) path from parent to the child nodes
+                      function diagonal(s, d) {
+
+                        path = `M ${s.y} ${s.x}
+                                C ${(s.y + d.y) / 2} ${s.x},
+                                  ${(s.y + d.y) / 2} ${d.x},
+                                  ${d.y} ${d.x}`
+
+                        return path
+                      }
+
+                      // Toggle children on click.
+                      function click(d) {
+                        if (d.children) {
+                            d._children = d.children;
+                            d.children = null;
+                          } else {
+                            d.children = d._children;
+                            d._children = null;
+                          }
+                        update(d);
+                      }
+                    }
+
+                </script>
+
+
+
+                
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    // Load google charts
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    // Draw the chart and set the chart values
+                    function drawChart() {
+                      var data = google.visualization.arrayToDataTable([
+                      ['Task', 'Whole Student view With Red Green and Yellow Zone'],
+                      ['Green', 1],
+                      ['Red', 2],
+                      ['Yellow', 2]
+                    ]);
+
+                      // Optional; add a title and set the width and height of the chart
+                      var options = {'title':'Whole Student view With Red Green and Yellow Zone', 'width':760, 'height':425};
+
+                      // Display the chart inside the <div> element with id="piechart"
+                      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                      chart.draw(data, options);
+                    }
+                </script>
+            
+                <script type="text/javascript">
+                  google.charts.load('current', {'packages':['bar']});
+                  google.charts.setOnLoadCallback(drawChart);
+
+                  function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                      ['Department', 'Green', 'Red', 'Yellow'],
+                      ['CSE', 1000, 400, 200],
+                      ['EEE', 1170, 460, 250],
+                      ['SWE', 660, 1120, 300],
+                      ['Textile', 1030, 540, 350]
+                    ]);
+
+                    var options = {
+                      chart: {
+                        title: 'Dropout View for All Department',
+                        subtitle: 'Green, Red, and Yellow',
+                      }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                  }
+                </script>
+
+
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+              <script type="text/javascript">
+                function viewGraph(){
+                    $('.column').css('height','0');
+                    $('table tr').each(function(index) {
+                    var ha = $(this).children('td').eq(1).text();
+                      $('#col'+index).animate({height: ha}, 1500).html("<div>"+ha+"</div>");
+                    });
+                  }
+                $(document).ready(function(){
+                    viewGraph();
+                });
+              </script>
+
+                <script src="https://www.amcharts.com/lib/4/core.js"></script>
+                <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+                <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+                <script>
+                    am4core.ready(function() {
+
+                    // Themes begin
+                    am4core.useTheme(am4themes_animated);
+                    // Themes end
+
+                    // Create chart instance
+                    var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+                    // Add data
+                    chart.data = [ {
+                      "Faculty": "FBE",
+                      "dropedstudent": 501
+                    }, {
+                      "Faculty": "FSIT",
+                      "dropedstudent": 301
+                    },{
+                      "Faculty": "FE",
+                      "dropedstudent": 340
+                    },{
+                      "Faculty": "FAHS",
+                      "dropedstudent": 340
+                    },{
+                      "Faculty": "FHSS",
+                      "dropedstudent": 340
+                    }];
+
+                    // Add and configure Series
+                    var pieSeries = chart.series.push(new am4charts.PieSeries());
+                    pieSeries.dataFields.value = "dropedstudent";
+                    pieSeries.dataFields.category = "Faculty";
+                    pieSeries.slices.template.stroke = am4core.color("#fff");
+                    pieSeries.slices.template.strokeWidth = 2;
+                    pieSeries.slices.template.strokeOpacity = 1;
+
+                    // This creates initial animation
+                    pieSeries.hiddenState.properties.opacity = 1;
+                    pieSeries.hiddenState.properties.endAngle = -90;
+                    pieSeries.hiddenState.properties.startAngle = -90;
+
+                    }); // end am4core.ready()
+                </script>
+
+            </section>
+
+            <!-- END STATISTIC CHART-->
+
+
+            <!-- Faculty Link Added-->
+           <div style="margin-left: 60px ; margin-top: 60px">
+
+                    {% for i in faculties %}
+
+                   
+                        {% for j in i %}
+                            {% if 'faculty' in j %}
+                                <form action="faculties" method="POST" style="float: left">
+                                    <input style="background: white; color: green; margin-left: 10px" type="submit" name="submit" value="{{i[j]}}" onclick="change('doctorRegistration')">
+                                </form>
+                            {% else %}
+                                {% for k in i[j] %}
+                                   <form action="departments" method="POST" style="float: left">
+                                    <input style="background: white; color: blue; margin-left: 10px" type="submit" name="submit" value="{{ i[j][k] }}"onclick="change('doctorRegistration')">
+                                    </form>
+                                {% endfor %}
+                                <br>
+                            {% endif %}
+
+                        {% endfor %}
+                    
+                    {% endfor %}
+            </div> 
+
+
+            <!-- DATA TABLE-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="title-5 m-b-35" style="margin-top: 60px">data table</h3>
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data2">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox">
+                                                    <span class="au-checkmark"></span>
+                                                </label>
+                                            </th>
+                                            <th>Faculty Name</th>
+                                            <th>Total Students</th>
+                                            <th>Green Zone </th>
+                                            <th>Yellow Zone </th>
+                                            <th>Red Zone</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    {% for i in faculties %}
+                                        {% for j in i %}
+                                            {% if 'faculty' in j %}
+                                                <tbody>
+                                                    <tr class="tr-shadow">
+                                                        <td>
+                                                            <label class="au-checkbox">
+                                                                <input type="checkbox">
+                                                                <span class="au-checkmark"></span>
+                                                            </label>
+                                                        </td>
+                                                        <td>{{i[j]}}</td>
+                                                        <td>
+                                                            <span class="block-email">20000</span>
+                                                        </td>
+                                                        <td class="desc">3534</td>
+                                                        <td>3453</td>
+                                                        <td>
+                                                            <span class="status--process">344</span>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    <tr class="spacer"></tr>
+                                                </tbody>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END DATA TABLE-->
+
+            <!-- COPYRIGHT-->
+            <section class="p-t-60 p-b-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 DIU. All rights reserved. Template by <a href="http://daffodilvarsity.edu.bd/">DIU</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END COPYRIGHT-->
+        </div>
+
+    </div>
+    <!-- Jquery JS-->
+    <script src="{{url_for('static',filename='vendor/jquery-3.2.1.min.js')}}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{{url_for('static',filename='vendor/bootstrap-4.1/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
+    <!-- Vendor JS       -->
+    <script src="{{url_for('static',filename='vendor/slick/slick.min.js')}}">
+    </script>
+    <script src="{{url_for('static',filename='vendor/wow/wow.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/animsition/animsition.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
+    </script>
+    <script src="{{url_for('static',filename='vendor/counter-up/jquery.waypoints.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/counter-up/jquery.counterup.min.js')}}">
+    </script>
+    <script src="{{url_for('static',filename='vendor/circle-progress/circle-progress.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+
+    <script src="{{url_for('static',filename='vendor/select2/select2.min.js')}}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+
+</body>
+
+</html>
+<!-- end document-->
